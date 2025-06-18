@@ -1,0 +1,11 @@
+﻿  graRPG10.cpp
+C:\Users\Lenovo\Desktop\graRPG\graRPG10\graRPG10\graRPG10.cpp(703,60): warning C4244: "=": konwersja z "double" do "int", możliwa utrata danych
+C:\Users\Lenovo\Desktop\graRPG\graRPG10\graRPG10\graRPG10.cpp(994,13): warning C4473: „scanf_s”: przekazano niewystarczającą liczbę argumentów dla ciągu formatowania
+      C:\Users\Lenovo\Desktop\graRPG\graRPG10\graRPG10\graRPG10.cpp(994,13):
+      symbole zastępcze i ich parametry oczekują 2 argumentów ze zmienną liczbą argumentów, ale podano następującą liczbę zmiennych argumentów: 1
+      C:\Users\Lenovo\Desktop\graRPG\graRPG10\graRPG10\graRPG10.cpp(994,13):
+      brakujący argument 2 o zmiennej liczbie parametrów jest wymagany w ciągu formatu „%c”
+      C:\Users\Lenovo\Desktop\graRPG\graRPG10\graRPG10\graRPG10.cpp(994,13):
+      ten argument jest używany jako rozmiar bufora
+  
+  graRPG10.vcxproj -> C:\Users\Lenovo\Desktop\graRPG\graRPG10\x64\Debug\graRPG10.exe
