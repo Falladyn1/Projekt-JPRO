@@ -868,7 +868,6 @@ int battle(Player* player, Enemy* enemy, GameWorld* world) {
             continue;
         }
 
-        // Reszta funkcji pozostaje bez zmian
         if (enemy->health <= 0) {
             printf("Pokonales %s!\n", enemy->name);
             int gold = 10 + rand() % 20;
@@ -939,7 +938,6 @@ void moveEnemy(Enemy* enemy) {
 void freeGameWorld(GameWorld* world) {
     if (!world) return;
 
-    // Zwolnij przedmioty na ziemi
     for (int i = 0; i < world->groundItemCount; i++) {
         free(world->groundItems[i]);
     }
@@ -947,7 +945,6 @@ void freeGameWorld(GameWorld* world) {
 
     // Zwolnij ekwipunek
     if (world->player && world->player->inventory) {
-        // Najpierw zwolnij przedmioty w ekwipunku
         for (int y = 0; y < world->player->inventory->height; y++) {
             for (int x = 0; x < world->player->inventory->width; x++) {
                 Item* item = world->player->inventory->items[y][x];
@@ -1005,12 +1002,10 @@ void movePlayerAndEnemy(GameWorld* world) {
         return;
     }
     else if (move == 'p' || move == 'P') {
-        // Podnoszenie przedmiotów
         for (int i = 0; i < world->groundItemCount; i++) {
             if (world->player->posX == world->groundItems[i]->posX &&
                 world->player->posY == world->groundItems[i]->posY) {
 
-                // Stwórz nową kopię przedmiotu
                 Item* newItem = (Item*)malloc(sizeof(Item));
                 if (!newItem) {
                     printf("Błąd alokacji pamięci dla przedmiotu!\n");
@@ -1019,7 +1014,6 @@ void movePlayerAndEnemy(GameWorld* world) {
                 }
                 memcpy(newItem, world->groundItems[i], sizeof(Item));
 
-                // Spróbuj dodać do ekwipunku
                 int added = 0;
                 for (int y = 0; y < world->player->inventory->height && !added; y++) {
                     for (int x = 0; x < world->player->inventory->width && !added; x++) {
@@ -1027,7 +1021,7 @@ void movePlayerAndEnemy(GameWorld* world) {
                             if (addItemToInventory(world->player->inventory, newItem, x, y)) {
                                 printf("Podniesiono %s!\n", newItem->name);
                                 added = 1;
-                                // Usuń przedmiot z ziemi
+                                
                                 free(world->groundItems[i]);
                                 for (int j = i; j < world->groundItemCount - 1; j++) {
                                     world->groundItems[j] = world->groundItems[j + 1];
@@ -1040,7 +1034,7 @@ void movePlayerAndEnemy(GameWorld* world) {
 
                 if (!added) {
                     printf("Nie masz miejsca w ekwipunku na %s!\n", newItem->name);
-                    free(newItem); // Zwolnij pamięć jeśli nie udało się dodać
+                    free(newItem); 
                 }
 
                 Sleep(1000);
@@ -1121,14 +1115,13 @@ void movePlayerAndEnemy(GameWorld* world) {
                     }
 
                     if (!added) {
-                        // Tworzymy nową kopię przedmiotu dla ziemi
                         Item* groundItem = (Item*)malloc(sizeof(Item));
                         if (groundItem) {
                             memcpy(groundItem, droppedItem, sizeof(Item));
                             addItemToGround(world, groundItem, world->player->posX, world->player->posY);
                             printf("Położono %s na ziemi (brak miejsca w ekwipunku).\n", groundItem->name);
                         }
-                        free(droppedItem); // Zwalniamy oryginalny przedmiot
+                        free(droppedItem);
                     }
                 }
                 else {
